@@ -35,7 +35,7 @@ namespace OOP_Laba4
                     e.Graphics.DrawEllipse(pen, x - radius, y - radius, radius * 2, radius * 2);
                     e.Graphics.FillEllipse(Brushes.Blue, x - radius, y - radius, radius * 2, radius * 2);
                 }
-                else if (deleted){ // Некорректно работает при пересечении объектов
+                else if (deleted){
                     pen.Color = SystemColors.Control;
                     e.Graphics.DrawEllipse(pen, x - radius, y - radius, radius * 2, radius * 2);
                     e.Graphics.FillEllipse(SystemBrushes.Control, x - radius, y - radius, radius * 2, radius * 2);
@@ -146,7 +146,7 @@ namespace OOP_Laba4
                     }
                     if (nearestObj != null) 
                     {
-                        MakeAllObjsUnselected();
+                        if (!CtrlPressed) { MakeAllObjsUnselected(); }
                         nearestObj.MakeMeSelected(); 
                     }
                     
@@ -241,7 +241,7 @@ namespace OOP_Laba4
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.ControlKey && checkedListBox1.CheckedIndices.Contains(0))
+           if (e.KeyCode == Keys.ControlKey && checkedListBox1.CheckedIndices.Contains(0))
             {
                 CtrlPressed = true;
             }
