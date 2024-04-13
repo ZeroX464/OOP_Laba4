@@ -155,11 +155,16 @@ namespace OOP_Laba4
             }
             public void DeleteSelectedFromContainer()
             {
-                for (int i = 0; i< size; i++)
+                int const_size = size;
+                for (int i = 0; i < const_size; i++)
                 {
-                    if (array[i].IsSelected())
+                    if (array[i] != null)
                     {
-                        DeleteObjFromContainer(array[i]);
+                        if (array[i].IsSelected())
+                        {
+                            DeleteObjFromContainer(array[i]);
+                            i--;
+                        }
                     }
                 }
             }
@@ -214,7 +219,7 @@ namespace OOP_Laba4
             {
                 CCircle createdCircle = new CCircle(e.X, e.Y);
                 c.Push_back(createdCircle);
-                createdCircle.SelectionCheck(e, CtrlPressed, true);
+                createdCircle.MakeMeSelected();
             }
             this.Refresh();
         }
