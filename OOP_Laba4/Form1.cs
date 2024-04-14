@@ -22,7 +22,8 @@ namespace OOP_Laba4
         {
             private int x, y;
             private const int radius = 40;
-            private bool selected = false, deleted = false;
+            public bool selected = false;
+            private bool deleted = false;
             public CCircle() { x = 0; y = 0; }
             public CCircle(int x, int y) { this.x = x; this.y = y; }
             public CCircle(CCircle circle) { x = circle.x; y = circle.y; }
@@ -76,14 +77,6 @@ namespace OOP_Laba4
                 {
                     deleted = true;
                 }
-            }
-            public void MakeMeSelected()
-            {
-                selected = true;
-            }
-            public void MakeMeUnselected()
-            {
-                selected = false;
             }
             public int getRLength(MouseEventArgs e)
             {
@@ -147,7 +140,7 @@ namespace OOP_Laba4
                     if (nearestObj != null) 
                     {
                         if (!CtrlPressed) { MakeAllObjsUnselected(); }
-                        nearestObj.MakeMeSelected(); 
+                        nearestObj.selected = true; 
                     }
                     
                 }
@@ -197,14 +190,14 @@ namespace OOP_Laba4
             {
                 if (size > 0)
                 {
-                    array[size - 1].MakeMeSelected();
+                    array[size - 1].selected = true;
                 }
             }
             public void MakeAllObjsUnselected()
             {
                 for (int i = 0; i < size; i++)
                 {
-                    array[i].MakeMeUnselected();
+                    array[i].selected = false;
                 }
             }
         }
@@ -219,7 +212,7 @@ namespace OOP_Laba4
             {
                 CCircle createdCircle = new CCircle(e.X, e.Y);
                 c.Push_back(createdCircle);
-                createdCircle.MakeMeSelected();
+                createdCircle.selected = true;
             }
             this.Refresh();
         }
@@ -233,6 +226,7 @@ namespace OOP_Laba4
         {
             if (e.KeyCode == Keys.ControlKey) 
             {
+                label2.Text = "CtrlPressed = false";
                 CtrlPressed = false;
             }
             if (e.KeyCode == Keys.Delete)
@@ -248,6 +242,7 @@ namespace OOP_Laba4
         {
            if (e.KeyCode == Keys.ControlKey && checkedListBox1.CheckedIndices.Contains(0))
             {
+                label2.Text = "CtrlPressed = true";
                 CtrlPressed = true;
             }
         }
@@ -256,10 +251,12 @@ namespace OOP_Laba4
         {
             if (checkedListBox1.CheckedIndices.Contains(1))
             {
+                label1.Text = "MultiplySelections = true";
                 MultiplySelections = true;
             }
             else
             {
+                label1.Text = "MultiplySelections = false";
                 MultiplySelections = false;
             }
         }
