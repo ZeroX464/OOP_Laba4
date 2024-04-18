@@ -23,12 +23,12 @@ namespace OOP_Laba4
             private int x, y;
             private const int radius = 40;
             public bool selected = false;
-            private bool deleted = false;
+            private bool deleted = false; // Вместо закрашивания круга нужно закрасить весь background image и отрисовать всё заново
             public CCircle() { x = 0; y = 0; }
             public CCircle(int x, int y) { this.x = x; this.y = y; }
             public CCircle(CCircle circle) { x = circle.x; y = circle.y; }
             ~CCircle() {}
-            public void DrawMe(PaintEventArgs e)
+            public void DrawMe(PaintEventArgs e) // Сюда нужно передавать Graphics от PictureBox
             {
                 Pen pen = new Pen(Color.Brown, 3);
                 if (selected && !deleted)
@@ -51,13 +51,13 @@ namespace OOP_Laba4
             {
                     if ((e.X > x - radius && e.X < x + radius) && (e.Y > y - radius && e.Y < y + radius))
                     {
-                    if (MultiplySelections) { selected = true; }
-                        return true;
+                    if (MultiplySelections) { selected = true; } // Здесь не нужно MultiplySelections и CrtlPressed, точка не должна знать о существовании других точек
+                    return true;
                     }
                     else
                     {
                     if (!CrtlPressed) { selected = false; }
-                        return false;
+                    return false;
                     }
             }
             public bool IsSelected() 
